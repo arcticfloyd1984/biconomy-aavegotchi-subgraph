@@ -1,0 +1,5 @@
+type TransferEntity @entity {
+  id: ID!
+  senderAddress: Bytes!
+  receiverAddress: Bytes! 
+}
