@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class TransferEntity extends Entity {
+export class MetaTransaction extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class TransferEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save TransferEntity entity without an ID");
+    assert(id !== null, "Cannot save MetaTransaction entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save TransferEntity entity with non-string ID. " +
+      "Cannot save MetaTransaction entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("TransferEntity", id.toString(), this);
+    store.set("MetaTransaction", id.toString(), this);
   }
 
-  static load(id: string): TransferEntity | null {
-    return store.get("TransferEntity", id) as TransferEntity | null;
+  static load(id: string): MetaTransaction | null {
+    return store.get("MetaTransaction", id) as MetaTransaction | null;
   }
 
   get id(): string {
@@ -42,21 +42,21 @@ export class TransferEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get senderAddress(): Bytes {
-    let value = this.get("senderAddress");
+  get userAddress(): Bytes {
+    let value = this.get("userAddress");
     return value.toBytes();
   }
 
-  set senderAddress(value: Bytes) {
-    this.set("senderAddress", Value.fromBytes(value));
+  set userAddress(value: Bytes) {
+    this.set("userAddress", Value.fromBytes(value));
   }
 
-  get receiverAddress(): Bytes {
-    let value = this.get("receiverAddress");
+  get relayerAddress(): Bytes {
+    let value = this.get("relayerAddress");
     return value.toBytes();
   }
 
-  set receiverAddress(value: Bytes) {
-    this.set("receiverAddress", Value.fromBytes(value));
+  set relayerAddress(value: Bytes) {
+    this.set("relayerAddress", Value.fromBytes(value));
   }
 }

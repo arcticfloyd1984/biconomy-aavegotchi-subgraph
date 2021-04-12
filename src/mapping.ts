@@ -33,7 +33,7 @@ import {
   // EquipWearables,
   // TransferToParent,
   // UseConsumables,
-  // MetaTransactionExecuted,
+  MetaTransactionExecuted,
   // BuyPortals,
   // PurchaseItemsWithGhst,
   // PurchaseItemsWithVouchers,
@@ -59,10 +59,9 @@ import {
   // URI,
   // Approval,
   // ApprovalForAll1,
-  Transfer
+  // Transfer
 } from "../generated/Diamond/Diamond"
-
-import { TransferEntity } from "../generated/schema";
+import { MetaTransaction } from "../generated/schema";
 
 // export function handleClaimAavegotchi(event: ClaimAavegotchi): void {
 //   // Entities can be loaded from the store using a string ID; this ID
@@ -247,9 +246,14 @@ import { TransferEntity } from "../generated/schema";
 
 // export function handleUseConsumables(event: UseConsumables): void {}
 
-// export function handleMetaTransactionExecuted(
-//   event: MetaTransactionExecuted
-// ): void {}
+export function handleMetaTransactionExecuted(
+  event: MetaTransactionExecuted
+): void {
+  let metaTransaction = new MetaTransaction(event.transaction.hash.toHex());
+  metaTransaction.userAddress = event.params.userAddress;
+  metaTransaction.relayerAddress = event.params.relayerAddress;
+  metaTransaction.save();
+}
 
 // export function handleBuyPortals(event: BuyPortals): void {}
 
@@ -311,9 +315,4 @@ import { TransferEntity } from "../generated/schema";
 
 // export function handleApprovalForAll1(event: ApprovalForAll1): void {}
 
-export function handleTransfer(event: Transfer): void {
-  let transferData = new TransferEntity(event.transaction.hash.toHex());
-  transferData.senderAddress = event.params._from;
-  transferData.receiverAddress = event.params._to;
-  transferData.save();
-}
+// export function handleTransfer(event: Transfer): void {}
