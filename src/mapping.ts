@@ -59,7 +59,7 @@ import {
   // URI,
   // Approval,
   // ApprovalForAll1,
-  // Transfer
+  Transfer
 } from "../generated/Diamond/Diamond"
 import { MetaTransaction } from "../generated/schema";
 
@@ -315,4 +315,9 @@ export function handleMetaTransactionExecuted(
 
 // export function handleApprovalForAll1(event: ApprovalForAll1): void {}
 
-// export function handleTransfer(event: Transfer): void {}
+// export function handleTransfer(event: Transfer): void {
+//   let transfer = new TransferEntity(event.transaction.hash.toHex());
+//   transfer.senderAddress = event.params._from;
+//   transfer.receiverAddress = event.params._to;
+//   transfer.save()
+// } 

@@ -3,3 +3,9 @@ type MetaTransaction @entity {
   userAddress: Bytes!
   relayerAddress: Bytes! 
 }
+
+# type TransferEntity @entity {
+#   id: ID!
+#   senderAddress: Bytes!
+#   receiverAddress: Bytes!
+# }

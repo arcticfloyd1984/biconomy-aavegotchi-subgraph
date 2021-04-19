@@ -20,5 +20,6 @@ dataSources:
           file: Diamond/abis/Diamond.json
       eventHandlers:
         - event: MetaTransactionExecuted(address,address,bytes)
+          topic0: "0x5845892132946850460bff5a0083f71031bc5bf9aadcd40f1de79423eac9b10b"
           handler: handleMetaTransactionExecuted
       file: Diamond/Diamond.wasm
